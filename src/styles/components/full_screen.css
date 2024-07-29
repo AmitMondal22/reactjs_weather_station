@@ -1,0 +1,16 @@
+.fullscreen-container {
+    position: fixed; /* Ensures the container covers the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Enables Flexbox layout */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    background-color: #fff; /* Optional: background color */
+}
+
+.lottie-animation {
+    width: 200px; /* Fixed width for the animation */
+    height: 200px; /* Fixed height for the animation */
+}

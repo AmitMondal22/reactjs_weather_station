@@ -1,0 +1,26 @@
+/* Custom styles for the checkbox */
+.custom-checkbox .ant-checkbox-inner {
+    border-radius: 50%; /* Make the checkbox rounded */
+    border-color: #52c41a; /* Change the border color to green */
+  }
+  
+  .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #52c41a; /* Change the checkmark color to green */
+    border-color: #52c41a; /* Ensure border color matches the checkmark */
+  }
+  
+  .custom-checkbox .ant-checkbox-inner::after {
+    border: 1px solid white; /* Ensure the checkmark is visible with a white border */
+  }
+  
+  /* .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner::after {
+    transform: rotate(45deg) scale(1); 
+    left: 25%;
+    top: 50%;
+    width: 35%; 
+    height: 60%; 
+  } */
+  
+  .custom-checkbox:hover .ant-checkbox-inner {
+    border-color: #73d13d; /* Change border color on hover */
+  }
