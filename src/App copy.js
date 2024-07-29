@@ -15,58 +15,43 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-         
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<LoginPage />} />
           {/* <Route path="/" element={<HomePage />} /> */}
           <Route path="/login" element={<LoginPage />} />
-
-
-
-
-          {/* Protected Routes with Layout */}
-          <Route  path="*" element={
-              <LayoutComponent>
+          
+        {/* Protected routes with layout */}
+        <Route
+          path="*"
+          element={
+            <LayoutComponent>
               <Routes>
-
-
-
-
                 <Route
-                  path="/profile"
-                  element={
-                    <PrivateRoute>
-                      <ProfilePage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
-                  }
-                />
-                </Routes>
-              </LayoutComponent>
-            }
-          />
-
-
-
-          {/* 404 Not Found */}
-
-          <Route path="*" element={<NotFound />} />
-
-
-
-
-
+                    path="/profile"
+                    element={
+                      <PrivateRoute>
+                        <ProfilePage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <PrivateRoute>
+                        <Dashboard />
+                      </PrivateRoute>
+                    }
+                  />
+              </Routes>
+            </LayoutComponent>
+             }
+             />
 
 
         </Routes>
       </Router>
-      
+
+  
     </AuthProvider>
   );
 };
