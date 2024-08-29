@@ -1,7 +1,7 @@
 // src/screens/LoginPage.js
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthProvider';
+import { Navigate, useNavigate } from 'react-router-dom';
+// const {login, isAuthenticated, loading } = useAuth();
 import Lottie from 'lottie-react';
 
 import { Form, Input, Button, Row, Col, Checkbox  } from 'antd';
@@ -11,58 +11,47 @@ import '../styles/screen/login.css';
 
 import useLogin from '../hooks/apihooks/useLogin'
 
+import {convertErrorObjectToFormErrors } from '../utils/errorformat'
+import CustomMessage from '../components/notification/CustomMessage';
+import { useAuth } from '../contexts/AuthProvider';
+
 
 const LoginPage = () => {
   const {login, isAuthenticated, loading } = useAuth();
+
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const {loginHandler}=useLogin()
+  const {apiLogin}=useLogin()
 
   // redirect is login dashboard
   useEffect(() => {
-
-    if (!loading && isAuthenticated()) {
-      navigate('/dashboard');
-    }
-  }, [loading, isAuthenticated, navigate]);
+    console.log(loading);
+    console.log(isAuthenticated());
+  }, [loading, isAuthenticated]);
 
 
   // login event
   const onFinish = async (values) => {
-    console.log('Received values: ', values);
-    // var isValidUser=true;
-    let logindata=await loginHandler(values.username,values.password)
-    console.log("??????????????????????",logindata);
-    // call login  api
-    login(logindata);
-    navigate('/profile');
-   
-
-    // isValidUser=false;
-
-    // if (true) {
-    //   console.log("Zdvwse");
-    //   form.setFields([
-    //     {
-    //       name: 'username',
-    //       errors: [' '], // Leave this empty to only show an error on the password field
-    //     },
-    //     {
-    //       name: 'password',
-    //       errors: ['Invalid username or password!'],
-    //     },
-    //   ]);
-    // } else {
-    //   // Proceed with the login (e.g., redirect to another page)
-    //   console.log('Login successful!', values);
-    // }
-
-
+    let logindata=await apiLogin(values.username,values.password)
+    if(logindata.success){
+      CustomMessage('Login successful');
+      login(logindata);
+      
+      navigate('/main');
+    }else{
+      console.log(logindata.error);
+      // const jsondata = JSON.parse(logindata.error);
+      form.setFields([
+        convertErrorObjectToFormErrors(logindata.error)
+      ]);
+    }
   };
 
 
   return (
-<Row style={{ minHeight: '100vh' }}>
+    <>
+    {
+      isAuthenticated() ? <Navigate to={'/main'} replace/> : <Row style={{ minHeight: '100vh' }}>
       {/* Desktop view */}
       <Col
         xs={0}
@@ -134,6 +123,9 @@ const LoginPage = () => {
         </Form>
       </Col>
     </Row>
+    }
+    </>
+    
   );
 };
 

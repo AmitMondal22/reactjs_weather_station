@@ -1,25 +1,37 @@
 // LayoutComponent.js
-import React from 'react';
-import { Layout } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Breadcrumb, theme } from 'antd';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import "../styles/layout/layout.css"
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const LayoutComponent = ({ children }) => {
+  // const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(window.innerWidth < 768);
+
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar />
+    <Layout>
+      {/* <Topbar /> */}
+      {/* <Topbar onToggleSidebar={toggleSidebar} /> */}
+      <Sidebar collapsed={collapsed} />
       <Layout>
-        <Topbar />
-        <Content style={{ margin: '0 16px' }}>
-          <div style={{ padding: 24, minHeight: 360 }}>
-            {children}
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2024 Created by Ant UED
-        </Footer>
+        {/* <Sidebar /> */}
+        {/* <Sidebar collapsed={collapsed} /> */}
+        <Topbar onToggleSidebar={toggleSidebar} />
+        <Layout style={{ padding: '0 24px 24px'}}>
+        {children}
+          
+        </Layout>
       </Layout>
     </Layout>
   );

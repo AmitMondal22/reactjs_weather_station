@@ -1,0 +1,22 @@
+.sidebar {
+    background: #fff; /* Background color for sidebar */
+  }
+  
+  .site-layout-background {
+    background: #fff; /* Background color for content area */
+  }
+  
+  /* Adjustments for responsiveness */
+  @media (max-width: 992px) {
+    .sidebar {
+      position: fixed;
+      z-index: 1;
+      height: 100vh;
+      overflow: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+    }
+    .sidebar.collapsed {
+      transform: translateX(0);
+    }
+  }

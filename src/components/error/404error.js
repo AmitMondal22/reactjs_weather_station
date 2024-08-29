@@ -1,13 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import errorAnimation from '../../assets/lottie/Animation - 1722259034249.json'; // Replace with your Lottie file path
+import { useAuth } from '../../contexts/AuthProvider';
 
 const NotFound = () => {
+  const {isAuthenticated} = useAuth();
   const navigate = useNavigate();
-
   const handleGoHome = () => {
-    navigate('/');
+    navigate(isAuthenticated() ? 'main' : '');
   };
 
   return (
@@ -15,7 +16,15 @@ const NotFound = () => {
       <Lottie animationData={errorAnimation} style={styles.animation} />
       <h1 style={styles.title}>Page Not Found</h1>
       <p style={styles.message}>Oops! The page you're looking for doesn't exist.</p>
-      <button onClick={handleGoHome} style={styles.button}>Go to Home Page</button>
+      <button onClick={handleGoHome} style={styles.button}>
+
+      Go To
+      {
+            isAuthenticated() ? ' Home' : ' Login'
+      }
+     
+      
+      </button>
     </div>
   );
 };

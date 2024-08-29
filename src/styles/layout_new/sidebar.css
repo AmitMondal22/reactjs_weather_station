@@ -1,0 +1,34 @@
+/* sidebar.css */
+.site-layout-background {
+  background: #fff;
+}
+
+.logo-width {
+  width: 100%;
+  height: auto;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+
+.sidebar.ant-layout-sider-collapsed {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    z-index: 1000;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}

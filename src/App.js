@@ -3,70 +3,32 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthProvider';
 import PrivateRoute from './contexts/PrivateRoute';
-import HomePage from './screens/HomePage';
 import LoginPage from './screens/LoginPage';
 import ProfilePage from './screens/ProfilePage';
 import Dashboard from './screens/Dashboard';
 import NotFound from './components/error/404error';
 import LayoutComponent from './layouts/LayoutComponent';
+import MainLayout from './screens/MainLayout';
 
 const App = () => {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-         
-          <Route path="/" element={<LoginPage />} />
-          {/* <Route path="/" element={<HomePage />} /> */}
-          <Route path="/login" element={<LoginPage />} />
-
-
-
-
+          {/* Public Routes */}
+          <Route path="" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          
           {/* Protected Routes with Layout */}
-          <Route  path="*" element={
-              <LayoutComponent>
-              <Routes>
-
-
-
-
-                <Route
-                  path="/profile"
-                  element={
-                    <PrivateRoute>
-                      <ProfilePage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
-                  }
-                />
-                </Routes>
-              </LayoutComponent>
-            }
-          />
-
-
-
-          {/* 404 Not Found */}
-
+          <Route path="main" element={<MainLayout/>}>
+            <Route index={true} element={<Dashboard/>}/>
+            <Route path='profile' element={<ProfilePage/>}/>
+          </Route>
+          
+          {/* 404 Not Found Page (standalone) */}
           <Route path="*" element={<NotFound />} />
-
-
-
-
-
-
-
         </Routes>
       </Router>
-      
     </AuthProvider>
   );
 };

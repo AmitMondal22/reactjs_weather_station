@@ -1,0 +1,57 @@
+/* sidebar.css */
+.site-layout-background {
+  background: #fff;
+}
+
+.logo-width {
+  width: 100%;
+  height: auto;
+}
+
+.sidebar {
+  position: fixed;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+
+.sidebar.ant-layout-sider-collapsed {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .ant-layout-sider {
+    width: 80px; /* Adjust as needed for mobile view */
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+
+/* Customize the active menu item background color */
+.ant-menu-item-selected {
+  background-color: #aef2d5 !important; /* Replace with your desired color */
+}
+
+.ant-menu-item a {
+  color: black !important; /* Link color */
+}
+
+.ant-menu-submenu-title {
+  color: black !important; /* Parent item color */
+}
+
+.ant-menu-item:hover {
+  background-color: #aef2d5 !important; /* Optional: add hover color */
+}
+
+
+
